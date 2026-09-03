@@ -24,3 +24,68 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: #21d4d4;
+  color: #08245c;
+}
+
+.hero-title-blue {
+  color: #0050b8;
+}
+
+.hero-subtitle-blue {
+  color: #0066da;
+}
+
+@keyframes card-place {
+  0% {
+    transform: translateY(8px) scale(0.98);
+  }
+  55% {
+    transform: translateY(-3px) scale(1.01);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-card-place {
+  animation: card-place 420ms ease both;
+}
+
+@keyframes card-select {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  35% {
+    transform: translateY(-14px) scale(1.07) rotate(-1deg);
+  }
+  70% {
+    transform: translateY(2px) scale(0.98) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-card-select {
+  animation: card-select 520ms cubic-bezier(0.2, 0.9, 0.2, 1.2) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
