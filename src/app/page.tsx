@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import {
   Link2,
@@ -48,7 +48,7 @@ export default function Home() {
 
   const isHost = joinState?.role === "host";
   const currentStory = room?.stories[room.currentStoryIndex];
-  const inviteUrl = room ? `${globalThis.location?.origin || ""}?session=${room.code}` : "";
+  const inviteUrl = room ? `${globalThis.location?.origin || ""}/?session=${encodeURIComponent(room.code)}` : "";
   const stats = room ? calculateStats(room.participants, room.cards) : null;
   const hasAtLeastOneVote = Boolean(room?.participants.some((participant) => participant.hasVoted));
   const selectedVote = useMemo(() => {
@@ -56,6 +56,18 @@ export default function Home() {
     if (room?.revealed) return serverVote;
     return localSelectedRound === room?.round ? localSelectedVote : null;
   }, [joinState?.participantId, localSelectedRound, localSelectedVote, room?.participants, room?.revealed, room?.round]);
+
+  useEffect(() => {
+    const sessionCode = new URLSearchParams(window.location.search).get("session")?.trim();
+    if (!sessionCode) return;
+
+    const timer = window.setTimeout(() => {
+      setJoinForm((form) => ({ ...form, code: sessionCode.toUpperCase() }));
+      setScreen("join");
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   async function handleCreate() {
     if (!createForm.name.trim() || createForm.selectedCards.length < 2) return;
@@ -201,7 +213,7 @@ export default function Home() {
                 {screen === "join" && (
                   <div className="grid gap-4">
                     <h2 className="text-2xl font-black text-[#08245c]">Rejoindre une session</h2>
-                    <Field label="Nom de la session">
+                    <Field label="Code ou nom de la session">
                       <Input value={joinForm.code} onChange={(event) => setJoinForm({ ...joinForm, code: event.target.value })} placeholder="Planning equipe" />
                     </Field>
                     <Field label="Prenom ou pseudo">
