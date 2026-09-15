@@ -22,7 +22,7 @@ export function PokerTable({
   participants: Participant[];
   revealed: boolean;
   outliers: Set<string>;
-  isHost: boolean;
+  isHost?: boolean;
   canReveal: boolean;
   onReveal: () => void;
   onNewRound: () => void;
@@ -57,11 +57,11 @@ export function PokerTable({
             <Link2 className="size-4" />
             Copier
           </Button>
+          <Button variant="secondary" onClick={onReveal} disabled={revealed || !canReveal}>
+            Retourner les cartes
+          </Button>
           {isHost && (
             <>
-              <Button variant="secondary" onClick={onReveal} disabled={revealed || !canReveal}>
-                Retourner les cartes
-              </Button>
               <Button className="w-11 px-0" variant="secondary" onClick={onNewRound} title="Nouvelle estimation">
                 <RotateCcw className="size-4" />
               </Button>

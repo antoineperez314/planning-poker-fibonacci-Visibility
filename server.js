@@ -195,7 +195,8 @@ app.prepare().then(() => {
 
     socket.on("round:reveal", () => {
       const room = rooms.get(socket.data.roomCode);
-      if (!requireHost(socket, room)) return;
+      const participant = room?.participants.find((item) => item.id === socket.data.participantId);
+      if (!room || !participant || room.revealed) return;
       room.revealed = true;
       emitRoom(io, room);
     });
