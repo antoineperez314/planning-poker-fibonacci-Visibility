@@ -25,12 +25,12 @@ export function PokerCard({
         "hover:-translate-y-1 hover:shadow-cyan-400/25 active:scale-95 disabled:hover:translate-y-0",
         animate && "animate-card-select",
         selected
-          ? "border-orange-300 bg-[#0078ff] text-[#08245c] shadow-orange-500/30 ring-4 ring-orange-200"
-          : "border-cyan-100 bg-white text-[#08245c]",
+          ? "border-orange-300 bg-[#0078ff] text-[#08245c] shadow-orange-500/30 ring-4 ring-orange-200 dark:border-orange-300 dark:bg-cyan-400 dark:ring-orange-300/50"
+          : "border-cyan-100 bg-white text-[#08245c] dark:border-cyan-800 dark:bg-slate-950 dark:text-cyan-50",
       )}
       aria-label={`Voter ${value}`}
     >
-      <span className="grid size-8 place-items-center rounded-full bg-cyan-50 text-lg font-black text-[#08245c] group-hover:bg-white sm:size-9 sm:text-xl">
+      <span className="grid size-8 place-items-center rounded-full bg-cyan-50 text-lg font-black text-[#08245c] group-hover:bg-white dark:bg-cyan-950 dark:text-cyan-50 dark:group-hover:bg-cyan-900 sm:size-9 sm:text-xl">
         {value === "cafe" ? <Coffee className="size-5" /> : value}
       </span>
     </button>
@@ -46,13 +46,13 @@ export function VoteBackCard({ revealed, value, outlier }: { revealed: boolean; 
           revealed && "[transform:rotateY(180deg)]",
         )}
       >
-        <div className="absolute inset-0 grid place-items-center rounded-lg border border-cyan-200 bg-[#08245c] text-cyan-200 shadow-md [backface-visibility:hidden]">
+        <div className="absolute inset-0 grid place-items-center rounded-lg border border-cyan-200 bg-[#08245c] text-cyan-200 shadow-md [backface-visibility:hidden] dark:border-cyan-700 dark:bg-slate-950">
           <span className="text-sm font-black">BT</span>
         </div>
         <div
           className={clsx(
-            "absolute inset-0 grid place-items-center rounded-lg border bg-white text-base font-black text-[#08245c] shadow-md [backface-visibility:hidden] [transform:rotateY(180deg)]",
-            outlier ? "border-rose-300 ring-4 ring-rose-100" : "border-cyan-200",
+            "absolute inset-0 grid place-items-center rounded-lg border bg-white text-base font-black text-[#08245c] shadow-md [backface-visibility:hidden] [transform:rotateY(180deg)] dark:bg-slate-900 dark:text-cyan-50",
+            outlier ? "border-rose-300 ring-4 ring-rose-100 dark:ring-rose-900/70" : "border-cyan-200 dark:border-cyan-800",
           )}
         >
           {value === "cafe" ? <Coffee className="size-5" /> : value ?? "-"}

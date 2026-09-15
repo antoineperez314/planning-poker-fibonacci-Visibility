@@ -144,14 +144,14 @@ export default function Home() {
                 {screen === "home" && (
                   <div className="grid gap-5">
                     <div>
-                      <h2 className="text-2xl font-black text-[#08245c]">Salle de refinement moderne</h2>
-                      <p className="mt-2 text-sm leading-6 text-slate-500">
+                      <h2 className="text-2xl font-black text-[#08245c] dark:text-cyan-50">Salle de refinement moderne</h2>
+                      <p className="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-300">
                         Creez une salle, invitez votre equipe, votez en Fibonacci et revelez les cartes au bon moment.
                       </p>
                     </div>
                     <div className="grid grid-cols-4 gap-2">
                       {FIBONACCI_CARDS.slice(1, 9).map((card) => (
-                        <div key={card} className="grid aspect-[3/4] place-items-center rounded-lg bg-cyan-50 text-xl font-black text-[#0078ff] shadow-sm">
+                        <div key={card} className="grid aspect-[3/4] place-items-center rounded-lg bg-cyan-50 text-xl font-black text-[#0078ff] shadow-sm dark:bg-slate-900 dark:text-cyan-100">
                           {card}
                         </div>
                       ))}
@@ -161,12 +161,12 @@ export default function Home() {
 
                 {screen === "create" && (
                   <div className="grid gap-4">
-                    <h2 className="text-2xl font-black text-[#08245c]">Creer une session</h2>
+                    <h2 className="text-2xl font-black text-[#08245c] dark:text-cyan-50">Creer une session</h2>
                     <Field label="Nom de la session">
                       <Input value={createForm.name} onChange={(event) => setCreateForm({ ...createForm, name: event.target.value })} />
                     </Field>
                     <div>
-                      <div className="mb-2 text-sm font-semibold text-slate-700">Cartes utilisees</div>
+                      <div className="mb-2 text-sm font-semibold text-slate-700 dark:text-cyan-100">Cartes utilisees</div>
                       <div className="flex flex-wrap gap-2">
                         {FIBONACCI_CARDS.map((card) => {
                           const active = createForm.selectedCards.includes(card);
@@ -181,7 +181,7 @@ export default function Home() {
                                 }))
                               }
                               className={`rounded-lg border px-3 py-2 text-sm font-bold transition ${
-                                active ? "border-cyan-300 bg-cyan-50 text-[#0078ff]" : "border-slate-200 text-slate-400"
+                                active ? "border-cyan-300 bg-cyan-50 text-[#0078ff] dark:border-cyan-500 dark:bg-cyan-950 dark:text-cyan-100" : "border-slate-200 text-slate-400 dark:border-slate-700 dark:text-slate-500"
                               }`}
                             >
                               {card}
@@ -201,7 +201,7 @@ export default function Home() {
 
                 {screen === "join" && (
                   <div className="grid gap-4">
-                    <h2 className="text-2xl font-black text-[#08245c]">Rejoindre une session</h2>
+                    <h2 className="text-2xl font-black text-[#08245c] dark:text-cyan-50">Rejoindre une session</h2>
                     <Field label="Code ou nom de la session">
                       <Input value={joinForm.code} onChange={(event) => setJoinForm({ ...joinForm, code: event.target.value })} placeholder="Planning equipe" />
                     </Field>
@@ -217,7 +217,7 @@ export default function Home() {
                   </div>
                 )}
 
-                {(error || closed) && <p className="mt-4 rounded-lg bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600">{closed ? "La session a ete fermee." : error}</p>}
+                {(error || closed) && <p className="mt-4 rounded-lg bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-600 dark:bg-rose-950/60 dark:text-rose-200">{closed ? "La session a ete fermee." : error}</p>}
               </Panel>
             </section>
           )}
@@ -253,9 +253,9 @@ export default function Home() {
 
           {showInvite && room && (
             <div className="fixed inset-0 z-50 grid place-items-center bg-blue-950/45 px-4 backdrop-blur-sm" role="dialog" aria-modal="true">
-              <div className="w-full max-w-md rounded-lg border border-white/80 bg-white p-5 shadow-2xl shadow-blue-950/30">
+              <div className="w-full max-w-md rounded-lg border border-white/80 bg-white p-5 shadow-2xl shadow-blue-950/30 dark:border-cyan-800 dark:bg-slate-950">
                 <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-2 text-[#08245c]">
+                  <div className="flex items-center gap-2 text-[#08245c] dark:text-cyan-50">
                     <Link2 className="size-5 text-[#0078ff]" />
                     <h2 className="text-lg font-black">Invitation</h2>
                   </div>
@@ -263,10 +263,10 @@ export default function Home() {
                     Fermer
                   </Button>
                 </div>
-                <div className="mt-5 grid place-items-center rounded-lg bg-cyan-50 p-5">
+                <div className="mt-5 grid place-items-center rounded-lg bg-cyan-50 p-5 dark:bg-slate-900">
                   <QRCodeSVG value={inviteUrl || room.code} size={180} fgColor="#08245c" />
                 </div>
-                <div className="mt-4 rounded-lg border border-cyan-100 bg-cyan-50 px-4 py-3 text-center text-lg font-black text-[#08245c]">
+                <div className="mt-4 rounded-lg border border-cyan-100 bg-cyan-50 px-4 py-3 text-center text-lg font-black text-[#08245c] dark:border-cyan-800 dark:bg-cyan-950/50 dark:text-cyan-50">
                   {room.code}
                 </div>
                 <Button className="mt-4 w-full" variant="secondary" onClick={copyInvite}>

@@ -40,11 +40,11 @@ export function PokerTable({
   const radiusY = 36;
 
   return (
-    <section className="relative overflow-hidden rounded-lg border border-cyan-100 bg-[radial-gradient(circle_at_center,#e9fbff_0%,#f8fbff_46%,#d9ecff_88%,#fff3e0_100%)] p-2.5 shadow-xl shadow-blue-950/8 ring-1 ring-orange-100">
+    <section className="relative overflow-hidden rounded-lg border border-cyan-100 bg-[radial-gradient(circle_at_center,#e9fbff_0%,#f8fbff_46%,#d9ecff_88%,#fff3e0_100%)] p-2.5 shadow-xl shadow-blue-950/8 ring-1 ring-orange-100 dark:border-cyan-900 dark:bg-[radial-gradient(circle_at_center,#0b2a40_0%,#0b1730_48%,#061022_100%)] dark:shadow-black/30 dark:ring-cyan-950">
       <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
         <div>
-          <h2 className="text-xl font-black text-[#08245c]">Table de vote</h2>
-          <p className="text-sm font-medium text-slate-500">
+          <h2 className="text-xl font-black text-[#08245c] dark:text-cyan-50">Table de vote</h2>
+          <p className="text-sm font-medium text-slate-500 dark:text-slate-300">
             {votedCount} carte{votedCount > 1 ? "s" : ""} posee{votedCount > 1 ? "s" : ""} sur la table
           </p>
         </div>
@@ -67,7 +67,7 @@ export function PokerTable({
               </Button>
             </>
           )}
-          <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 text-sm font-bold text-[#0078ff] shadow-sm">
+          <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 text-sm font-bold text-[#0078ff] shadow-sm dark:bg-slate-900 dark:text-cyan-100">
             <Users className="size-4" />
             {participants.length}
           </div>
@@ -94,9 +94,9 @@ export function PokerTable({
             <div
               key={participant.id}
               className={clsx(
-                "absolute z-10 grid w-36 -translate-x-1/2 -translate-y-1/2 content-between rounded-lg border bg-white/94 p-2.5 shadow-lg backdrop-blur transition duration-300 sm:w-40",
-                participant.hasVoted && "animate-card-place border-orange-200 shadow-orange-500/15",
-                outliers.has(participant.id) ? "border-rose-300 ring-4 ring-rose-100" : "border-white",
+                "absolute z-10 grid w-36 -translate-x-1/2 -translate-y-1/2 content-between rounded-lg border bg-white/94 p-2.5 shadow-lg backdrop-blur transition duration-300 dark:bg-slate-950/94 sm:w-40",
+                participant.hasVoted && "animate-card-place border-orange-200 shadow-orange-500/15 dark:border-orange-300/70",
+                outliers.has(participant.id) ? "border-rose-300 ring-4 ring-rose-100 dark:ring-rose-900/70" : "border-white dark:border-cyan-900",
               )}
               style={{
                 left: `${x}%`,
@@ -107,7 +107,7 @@ export function PokerTable({
               <div className="flex min-w-0 items-center justify-between gap-2">
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5">
-                    <span className="truncate text-sm font-black text-[#08245c]">{participant.name}</span>
+                    <span className="truncate text-sm font-black text-[#08245c] dark:text-cyan-50">{participant.name}</span>
                     {participant.role === "host" && <Crown className="size-4 text-[#0078ff]" />}
                   </div>
                   <div className="mt-1 flex items-center gap-2 text-xs font-bold">
@@ -119,7 +119,7 @@ export function PokerTable({
                 </div>
                 <VoteBackCard revealed={revealed} value={participant.vote} outlier={outliers.has(participant.id)} />
               </div>
-              <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-100">
+              <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
                 <div className={clsx("h-full rounded-full transition-all duration-500", participant.hasVoted ? "w-full bg-cyan-400" : "w-1/4 bg-slate-200")} />
               </div>
             </div>
@@ -128,10 +128,10 @@ export function PokerTable({
         </div>
       </div>
 
-      <div className="border-t border-cyan-100 pt-1.5">
+      <div className="border-t border-cyan-100 pt-1.5 dark:border-cyan-900">
         <div className="mb-1.5 flex items-center justify-between gap-2">
-          <h2 className="text-xs font-black uppercase text-[#08245c]">Choisissez votre carte</h2>
-          {revealed && <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700">Cartes revelees</span>}
+          <h2 className="text-xs font-black uppercase text-[#08245c] dark:text-cyan-50">Choisissez votre carte</h2>
+          {revealed && <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-200">Cartes revelees</span>}
         </div>
         <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-7 lg:grid-cols-[repeat(13,minmax(0,1fr))]">
           {cards.map((card) => (
