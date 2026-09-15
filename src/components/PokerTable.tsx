@@ -8,7 +8,6 @@ export function PokerTable({
   participants,
   revealed,
   outliers,
-  isHost,
   canReveal,
   onReveal,
   onNewRound,
@@ -22,7 +21,6 @@ export function PokerTable({
   participants: Participant[];
   revealed: boolean;
   outliers: Set<string>;
-  isHost?: boolean;
   canReveal: boolean;
   onReveal: () => void;
   onNewRound: () => void;
@@ -60,13 +58,9 @@ export function PokerTable({
           <Button variant="secondary" onClick={onReveal} disabled={revealed || !canReveal}>
             Retourner les cartes
           </Button>
-          {isHost && (
-            <>
-              <Button className="w-11 px-0" variant="secondary" onClick={onNewRound} title="Nouvelle estimation">
-                <RotateCcw className="size-4" />
-              </Button>
-            </>
-          )}
+          <Button className="w-11 px-0" variant="secondary" onClick={onNewRound} title="Nouvelle estimation">
+            <RotateCcw className="size-4" />
+          </Button>
           <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 text-sm font-bold text-[#0078ff] shadow-sm dark:bg-slate-900 dark:text-cyan-100">
             <Users className="size-4" />
             {participants.length}

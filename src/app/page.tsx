@@ -229,7 +229,6 @@ export default function Home() {
                   participants={room.participants}
                   revealed={room.revealed}
                   outliers={stats.outliers}
-                  isHost={isHost}
                   canReveal={hasAtLeastOneVote}
                   onReveal={actions.reveal}
                   onNewRound={() => actions.newRound()}

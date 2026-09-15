@@ -203,7 +203,8 @@ app.prepare().then(() => {
 
     socket.on("round:new", ({ story }) => {
       const room = rooms.get(socket.data.roomCode);
-      if (!requireHost(socket, room)) return;
+      const participant = room?.participants.find((item) => item.id === socket.data.participantId);
+      if (!room || !participant) return;
       room.revealed = false;
       room.round += 1;
       room.participants.forEach((participant) => {
