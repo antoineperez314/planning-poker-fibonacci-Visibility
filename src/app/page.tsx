@@ -10,8 +10,6 @@ import {
   Sparkles,
   Sun,
   Users,
-  Volume2,
-  VolumeX,
 } from "lucide-react";
 import { PokerTable } from "@/components/PokerTable";
 import { ResultsPanel } from "@/components/ResultsPanel";
@@ -25,7 +23,6 @@ type Screen = "home" | "create" | "join" | "room";
 export default function Home() {
   const [screen, setScreen] = useState<Screen>("home");
   const [darkMode, setDarkMode] = useState(false);
-  const [sound, setSound] = useState(false);
   const [showInvite, setShowInvite] = useState(false);
   const [localSelectedVote, setLocalSelectedVote] = useState<string | null>(null);
   const [localSelectedRound, setLocalSelectedRound] = useState<number | null>(null);
@@ -92,11 +89,6 @@ export default function Home() {
     setLocalSelectedRound(room?.round ?? null);
     setVoteAnimationKey((key) => key + 1);
     actions.vote(value);
-    if (sound) {
-      const audio = new Audio("data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=");
-      audio.volume = 0.08;
-      audio.play().catch(() => undefined);
-    }
   }
 
   const shellClass = darkMode ? "dark" : "";
@@ -117,9 +109,6 @@ export default function Home() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="ghost" className="text-white hover:bg-white/10" onClick={() => setSound((value) => !value)} title="Son">
-                {sound ? <Volume2 className="size-5" /> : <VolumeX className="size-5" />}
-              </Button>
               <Button variant="ghost" className="text-white hover:bg-white/10" onClick={() => setDarkMode((value) => !value)} title="Theme">
                 {darkMode ? <Sun className="size-5" /> : <Moon className="size-5" />}
               </Button>
